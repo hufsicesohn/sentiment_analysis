@@ -1,9 +1,4 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# In[ ]:
-
-
+# 데이터 전처리 부분에서 웹 주소 제거하는 코드 추가
 import pandas as pd
 from sklearn.feature_extraction.text import TfidfVectorizer, CountVectorizer
 from sklearn.pipeline import Pipeline
@@ -17,10 +12,6 @@ X_train = train['text']
 y_train = train['sentiment']
 
 X_test = test['text']
-
-
-# In[ ]:
-
 
 def preprocess(x):
   for i in range(32000):
@@ -45,14 +36,8 @@ def preprocess(x):
   return x
 
 
-# In[ ]:
-
-
 X_train = preprocess(X_train)
 X_test = preprocess(X_test)
-
-
-# In[ ]:
 
 
 pipeline = Pipeline([
@@ -67,16 +52,8 @@ submit8 = pd.read_csv('/sample_submission.csv')
 submit8['sentiment'] = pred
 submit8.head()
 
-
-# In[ ]:
-
-
 submit8.to_csv('/baseline_submit12.csv', index=False)
 print('Done')
-
-
-# In[ ]:
-
 
 submit8 = pd.read_csv('/baseline_submit12.csv')
 
