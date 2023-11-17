@@ -1,9 +1,4 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# In[ ]:
-
-
+# 서포트 벡터머신 사용
 import pandas as pd
 from sklearn.svm import LinearSVC
 from sklearn.feature_extraction.text import CountVectorizer
@@ -15,9 +10,9 @@ import nltk
 
 nltk.download('punkt')
 
-
 stop_words = set(stopwords.words('english'))
 
+# 전처리 작업
 def data_processing(text):
     text = text.lower()
     text = re.sub(r"https\S+|www|\S+https\S+", '', text, flags=re.MULTILINE)
@@ -26,9 +21,6 @@ def data_processing(text):
     text_tokens = word_tokenize(text)
     filtered_text = [w for w in text_tokens if not w in stop_words]
     return " ".join(filtered_text)
-
-
-
 stemmer = PorterStemmer()
 def stemming(data):
     text = [stemmer.stem(word) for word in data]
