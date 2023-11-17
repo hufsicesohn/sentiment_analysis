@@ -1,9 +1,4 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# In[ ]:
-
-
+# 데이터 전처리 함수 수정
 import pandas as pd
 from sklearn.svm import LinearSVC
 from sklearn.feature_extraction.text import CountVectorizer
@@ -15,9 +10,9 @@ import nltk
 
 nltk.download('punkt')
 
-
 stop_words = set(stopwords.words('english'))
 
+# 데이터 전처리 한 번에 하는 함수 생성
 def data_processing(text):
     text = text.lower()
     text = re.sub(r"https\S+|www|\S+https\S+", '', text, flags=re.MULTILINE)
@@ -26,7 +21,6 @@ def data_processing(text):
     text_tokens = word_tokenize(text)
     filtered_text = [w for w in text_tokens if not w in stop_words]
     return " ".join(filtered_text)
-
 
 
 stemmer = PorterStemmer()
@@ -44,18 +38,10 @@ train['text'] = train['text'].apply(lambda x: stemming(x))
 test.text = test['text'].apply(data_processing)
 test['text'] = test['text'].apply(lambda x: stemming(x))
 
-
-# In[ ]:
-
-
 X_train = train['text']
 Y_train = train['sentiment']
 
 X_test = test['text']
-
-
-# In[ ]:
-
 
 from sklearn.pipeline import Pipeline
 from sklearn.linear_model import LogisticRegression
@@ -68,18 +54,10 @@ pipeline = Pipeline([
 pipeline.fit(x_train, y_train)
 pred = pipeline.predict(x_test)
 
-
-# In[ ]:
-
-
 submit9['sentiment'] = pred
 submit9.head()
 submit9.to_csv('./baseline_submit13.csv', index=False)
 print('Done')
-
-
-# In[ ]:
-
 
 submit9 = pd.read_csv('/baseline_submit13.csv')
 
