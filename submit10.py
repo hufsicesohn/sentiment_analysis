@@ -1,4 +1,4 @@
-
+# 데이터 전처리 부분에 표제어 추출하는 작업 추가
 import pandas as pd
 import numpy as np
 import matplotlib as plt
@@ -19,7 +19,6 @@ test = pd.read_csv('C:/Users/sohnp/Downloads/open (2)/test.csv')
 Train = train['text']
 Test = test['text']
 
-# 데이터 전처리 부분에 표제어 추출하는 작업 추가
 def data_processing(text):
     text = re.sub(r"https\S+|www|\S+https\S+", '', text, flags=re.MULTILINE)
     text = re.sub(r'\@w+|\#', '', text)
